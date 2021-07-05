@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Lunch.run</title>
+        <title>Reg</title>
         <meta name="description" content="Kyle Henderson's special place" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
