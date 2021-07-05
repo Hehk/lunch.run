@@ -491,10 +491,9 @@ export default function Home() {
       </Head>
       
       <main className="graph-paper">
-        <GraphPaper />
         <Container> 
           <H1>Austin Running</H1>
-          <H2>Weekly Runs --------------</H2>
+          <H2>Weekly Runs -------------</H2>
           {Object.entries(events).map(([day, events]) => {
             return <React.Fragment key={day}>
               <H3>{day}</H3>
@@ -504,7 +503,7 @@ export default function Home() {
             </React.Fragment>
           })}
 
-          <H2>Groups -------------------</H2>
+          <H2>Groups ------------------</H2>
           {Object.entries(groups).map(([id, group]) => {
             return <React.Fragment key={id}>
               <H3>{group.name}</H3>

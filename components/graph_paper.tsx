@@ -10,6 +10,7 @@ const css = `
     linear-gradient(90deg, transparent calc(${ size } - 1px), ${color} calc(${ size } - 1px), ${color} ${ size }, transparent ${ size });
 }
 `
+
 export default function GraphPaper () {
   return <style jsx>{css}</style>
 }
