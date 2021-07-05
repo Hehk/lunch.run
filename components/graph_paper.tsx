@@ -2,6 +2,7 @@ const size = '1rem'
 const color = '#f4f4f4'
 const css = `
 .graph-paper {
+  min-height: 100vh;
   background-color: #fff;
   background-size: ${size} ${size};
   background-image: 

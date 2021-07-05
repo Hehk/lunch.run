@@ -11,6 +11,7 @@ import H3 from '../components/h3'
 type event = {
   name: string
   description: string
+  location: string
   time: {
     day: number
     hour: number
@@ -20,11 +21,13 @@ type event = {
 
 type group = {
   name: string
+  description?: string,
   social: {
     instagram?: string
     facebook?: string
     website?: string
     strava?: string
+    twitter?: string
   },
   runs: event[]
 }
@@ -47,7 +50,6 @@ const groups : Record<string, group> = {
           minute: 30,
           day: 2
         },
-        group: 'MORNING_JOES'
       }
     ]
   },
@@ -126,7 +128,6 @@ const groups : Record<string, group> = {
           minute: 0,
           day: 1
         },
-        group: 'COMMODOR_RUN_CLUB'
       },
       {
         name: 'Commodor Run Club',
@@ -137,7 +138,6 @@ const groups : Record<string, group> = {
           minute: 0,
           day: 3
         },
-        group: 'COMMODOR_RUN_CLUB'
       },
       {
         name: 'Commodor Run Club',
@@ -148,7 +148,6 @@ const groups : Record<string, group> = {
           minute: 0,
           day: 4
         },
-        group: 'COMMODOR_RUN_CLUB'
       },
       {
         name: 'Commodor Run Club',
@@ -159,7 +158,6 @@ const groups : Record<string, group> = {
           minute: 0,
           day: 5
         },
-        group: 'COMMODOR_RUN_CLUB'
       }
 
 
@@ -411,6 +409,7 @@ const groups : Record<string, group> = {
       {
         name: "Saturday Gazelles",
         description: "Long run ranging from 3-22 miles, hydration stops and post run strength. This is a paid group, you can pay $10 to jump in.",
+        location: "The Loop Running Store",
         time: {
           day: 6,
           hour: 5,
@@ -421,7 +420,7 @@ const groups : Record<string, group> = {
   }
 }
 
-function getDay (num) {
+function getDay (num : number) {
   switch (num) {
     case 1: return 'monday'
     case 2: return 'tuesday'
@@ -430,15 +429,12 @@ function getDay (num) {
     case 5: return 'friday'
     case 6: return 'saturday'
     case 7: return 'sunday'
+    default: return 'sunday'
   }
 }
-const emptyEvents = [1,2,3,4,5,6,7].reduce((acc, n) => {
-  acc[getDay(n)] = []
-  return acc
-}, {})
-const events = Object.values(groups).reduce((events, group) => {
+let events : Record<string, event[]> = { monday: [], tuesday: [], wednesday: [], thursday: [], friday: [], saturday: [], sunday: [] }
+events = Object.values(groups).reduce((events, group) => {
   group.runs.forEach(event => {
-    console.log(event, getDay(event.time.day), events)
     events[getDay(event.time.day)].push(event)
     events[getDay(event.time.day)].sort((a, b) => {
       let diff = a.time.hour - b.time.hour
@@ -447,9 +443,9 @@ const events = Object.values(groups).reduce((events, group) => {
     })
   })
     return events
-}, emptyEvents)
+}, events)
 
-function padZero (time) {
+function padZero (time : number) {
   let output = time.toString()
   if (output.length === 1) {
     return '0' + output
@@ -458,17 +454,17 @@ function padZero (time) {
   }
 }
 
-function formatHour (hour) {
+function formatHour (hour : number) {
   if (hour >= 13) hour -= 12
   return padZero(hour)
 }
 
-function AMorPM (hour) {
+function AMorPM (hour : number) {
   if (hour >= 12) return 'PM'
   return 'AM'
 }
 
-function Event ({ event }) {
+function Event ({ event } : { event: event }) {
   return <li className="text-base leading-4">
     <div className="pb-4">
      <span className="event-baseline w-20 inline-block">{formatHour(event.time.hour)}:{padZero(event.time.minute)}{AMorPM(event.time.hour)}</span>
@@ -480,9 +476,9 @@ function Event ({ event }) {
   </li>
 }
 
-function Social ({ link, name }) {
+function Social ({ link, name } : { link?: string, name: string }) {
   if (!link) return null
-  return <a className="event-baseline pr-4" href={link}>{name}</a>
+  return <a className="event-baseline pr-4 underline" href={link}>{name}</a>
 }
 
 export default function Home() {
