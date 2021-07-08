@@ -33,6 +33,46 @@ type group = {
 }
 
 const groups : Record<string, group> = {
+  SHOAL_CREEK_STRIDERS: {
+    name: "Shoal Creek Striders",
+    social: {
+      instagram: "https://www.instagram.com/shoalcreekstriders/",
+      website: "https://linktr.ee/shoalcreekstriders",
+      facebook: "https://www.facebook.com/ShoalCreekStriders/",
+    },
+    runs: [
+      {
+        name: "Shoal Creek Striders",
+        description: "3-5 miles",
+        location: "3900 Far W Blvd, Austin, TX 78731",
+        time: {
+          hour: 6,
+          minute: 30,
+          day: 1
+        }
+      },
+      {
+        name: "Shoal Creek Striders",
+        description: "3-5 miles",
+        location: "2917 W. Anderson Ln, Austin, TX 78757",
+        time: {
+          hour: 6,
+          minute: 30,
+          day: 3
+        }
+      },
+      {
+        name: "Shoal Creek Striders",
+        description: "3-5 miles",
+        location: "2917 W. Anderson Ln, Austin, TX 78757",
+        time: {
+          hour: 6,
+          minute: 30,
+          day: 5
+        }
+      }
+    ]
+  },
   MORNING_JOES: {
     name: "Morning Joe's",
     social: {
