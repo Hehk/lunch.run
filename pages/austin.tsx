@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import React from 'react'
 import Image from 'next/image'
-import Baseline from '../components/baseline'
 import Container from '../components/container'
-import GraphPaper from '../components/graph_paper'
 import H1 from '../components/h1'
 import H2 from '../components/h2'
 import H3 from '../components/h3'
+import Text from '../components/text'
+import styles from '../styles/global.module.css'
 
 type event = {
   name: string
@@ -505,20 +505,19 @@ function AMorPM (hour : number) {
 }
 
 function Event ({ event } : { event: event }) {
-  return <li className="text-base leading-4">
-    <div className="pb-4">
-     <span className="event-baseline w-20 inline-block">{formatHour(event.time.hour)}:{padZero(event.time.minute)}{AMorPM(event.time.hour)}</span>
-     <span className="event-baseline font-bold">{event.name}</span>
+  return <li>
+    <div className="pb-4 text-base leading-4">
+     <Text className="w-20 inline-block">{formatHour(event.time.hour)}:{padZero(event.time.minute)}{AMorPM(event.time.hour)}</Text>
+     <Text className="font-bold inline-block">{event.name}</Text>
     </div>  
-    <p className="event-baseline pl-20 pb-4">{event.description}</p>
-    <p className="event-baseline pl-20 pb-4">@ {event.location}</p>
-    <Baseline cls="event" top={2} />
+    <Text className="pl-20 pb-4">{event.description}</Text>
+    <Text className="pl-20 pb-4">@ {event.location}</Text>
   </li>
 }
 
 function Social ({ link, name } : { link?: string, name: string }) {
   if (!link) return null
-  return <a className="event-baseline pr-4 underline" href={link}>{name}</a>
+  return <a className="pr-4" href={link}><Text className="inline-block underline">{name}</Text></a>
 }
 
 export default function Home() {
@@ -530,7 +529,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main className="graph-paper">
+      <main className={styles.graphPaper}>
         <Container> 
           <H1>Austin Running</H1>
           <H2>Weekly Runs -------------</H2>

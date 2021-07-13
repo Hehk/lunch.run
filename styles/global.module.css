@@ -1,0 +1,8 @@
+.graphPaper {
+  min-height: 100vh;
+  background-color: #fff;
+  background-size: 1rem 1rem;
+  background-image: 
+    linear-gradient(0deg, transparent calc(1rem - 1px), #f4f4f4 calc(1rem - 1px), #f4f4f4 1rem, transparent 1rem),
+    linear-gradient(90deg, transparent calc(1rem - 1px), #f4f4f4 calc(1rem - 1px), #f4f4f4 1rem, transparent 1rem);
+}
