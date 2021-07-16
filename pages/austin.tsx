@@ -6,7 +6,6 @@ import H1 from '../components/h1'
 import H2 from '../components/h2'
 import H3 from '../components/h3'
 import Text from '../components/text'
-import styles from '../styles/global.module.css'
 
 type event = {
   name: string
@@ -33,6 +32,26 @@ type group = {
 }
 
 const groups : Record<string, group> = {
+  AUSTIN_BEER_RUNNERS: {
+    name: "Austin Beer Runners",
+    social: {
+      facebook: "https://www.facebook.com/AustinBeerRunClub",
+      twitter: "https://twitter.com/AustinBeerRun",
+      website: "https://www.austinbeerrun.club/"
+    },
+    runs: [
+      {
+        name: "Beer Run",
+        description: "About 5k",
+        location: "Hold Out Brewing",
+        time: {
+          hour: 18,
+          minute: 30,
+          day: 2
+        }
+      }
+    ]
+  },
   SHOAL_CREEK_STRIDERS: {
     name: "Shoal Creek Striders",
     social: {
@@ -526,10 +545,11 @@ export default function Home() {
       <Head>
         <title>Austin Running</title>
         <meta name="description" content="Kyle Henderson's special place" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       
-      <main className={styles.graphPaper}>
+      <main>
         <Container> 
           <H1>Austin Running</H1>
           <H2>Weekly Runs -------------</H2>
