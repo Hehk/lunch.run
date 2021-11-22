@@ -62,7 +62,7 @@ export default function Gilbert() {
           }}
         >
           <h1 className="mb-4 text-xl">
-            Convert Gilbert's maps into GPX files
+            Convert Gilbert&apos;s maps into GPX files
           </h1>
           <input
             className="w-full px-6 py-3.5 rounded-lg border border-gray-200 shadow-sm appearance-none focus:outline-none focus:ring focus:border-blue-400 md:text-lg mb-4"
