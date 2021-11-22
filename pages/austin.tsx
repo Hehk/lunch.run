@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import React from 'react'
-import Image from 'next/image'
 import Container from '../components/container'
 import H1 from '../components/h1'
 import H2 from '../components/h2'
@@ -539,7 +538,7 @@ function Social ({ link, name } : { link?: string, name: string }) {
   return <a className="pr-4" href={link}><Text className="inline-block underline">{name}</Text></a>
 }
 
-export default function Home() {
+export default function Austin () {
   return (
     <div>
       <Head>
