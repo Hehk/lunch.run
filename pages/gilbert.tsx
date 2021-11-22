@@ -1,15 +1,33 @@
 import Head from "next/head";
-import Container from "../components/container";
+import me from "../public/me_and_reg.jpg";
 import { useState } from "react";
+
+type Loading =
+  | 'start'
+  | 'long-load'
+  | 'none'
+
+const loadingText = (loading: Loading) => {
+  switch (loading) {
+    case 'start': return 'Loading...'
+    case 'long-load': return 'Creating a new map, this can take a ~30s'
+    case 'none': return 'Get GPX!'
+  }
+}
 
 export default function Gilbert() {
   const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<Loading>('none');
   const [link, setLink] = useState("");
   const [error, setError] = useState("");
 
   const fetchGPX = async () => {
-    setLoading(true);
+    setLoading('start');
+    // TODO timeout mostly works but this could be more detailed
+    const timeout = setTimeout(() => {
+      setLoading('long-load')
+    }, 1500)
+
     try {
       const response = await fetch(
         "https://us-central1-gilbert-gps.cloudfunctions.net/function-1",
@@ -34,14 +52,19 @@ export default function Gilbert() {
       console.error(e);
       setError(e.message);
     } finally {
-      setLoading(false);
+      setLoading('none');
+      clearTimeout(timeout)
     }
   };
 
-  const submit = () => {
-    if (loading) return;
+  const submit = (e : React.SyntheticEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (loading !== 'none') return;
     fetchGPX();
   };
+
 
   return (
     <div>
@@ -55,11 +78,7 @@ export default function Gilbert() {
       <main>
         <form
           className="m-auto w-full bg-white p-5 md:p-8 max-w-md col-start-2 col-span-2"
-          onSubmit={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            submit();
-          }}
+          onSubmit={submit}
         >
           <h1 className="mb-4 text-xl">
             Convert Gilbert&apos;s maps into GPX files
@@ -76,7 +95,7 @@ export default function Gilbert() {
             type="submit"
             onClick={submit}
           >
-            {loading ? "loading" : "Make GPX"}
+            {loadingText(loading)}
           </button>
           {link ? (
             <a
@@ -88,9 +107,14 @@ export default function Gilbert() {
               GPX File! <span className="float-right">▼</span>
             </a>
           ) : null}
-        </form>
 
-        {error ? <span>{error}</span> : null}
+
+          {error ? <div className="bg-red-500 rounded-lg px-8 py-3.5 text-white">
+            <p>Error: {error}</p>
+            <br />
+            <p>If this persists, please bug me! I am the <a href={me.src} className="underline">young guy with long hair.</a></p>
+            </div> : null}
+        </form>
       </main>
     </div>
   );
