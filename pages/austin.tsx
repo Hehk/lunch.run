@@ -31,6 +31,56 @@ type group = {
 };
 
 const groups: Record<string, group> = {
+  SPEEDSHOP_MAFIA: {
+    name: "SpeedShop Mafia",
+    social: {
+      facebook: "https://www.facebook.com/groups/173579006902668/"
+    },
+    runs: [
+      {
+        name: "SpeedShop Workout",
+        description: "Workout rotates, check out their facebook for which one it will be",
+        location: "Yellowjacket Stadium",
+        time: {
+          hour: 18,
+          minute: 0,
+          day: 2
+        }
+      }
+    ]
+  },
+  SUNRISE_TRACK_CLUB: {
+    name: "Sunrise Track Club",
+    social: {
+      instagram: "https://www.instagram.com/sunrise_track_club/"
+    },
+    runs: [{
+      name: "Sunrise Track Club Track Workout",
+      description: "Workout varies",
+      location: "Austin High School",
+      time: {
+        hour: 6,
+        minute: 0,
+        day: 4
+      }
+    }]
+  },
+  NORTH_AUSTIN_RUN_CLUB: {
+    name: "North Austin Run Club",
+    social: {
+      facebook: "https://www.facebook.com/NorthAustinRunClub/"
+    },
+    runs: [{
+      name: "North Austin Run Club Evening Social Run",
+      description: "Evening Run",
+      location: "Little Woodrow's Burnet",
+      time: {
+        hour: 19,
+        minute: 0,
+        day: 1
+      }
+    }]
+  },
   AUSTIN_BEER_RUNNERS: {
     name: "Austin Beer Runners",
     social: {
@@ -40,7 +90,7 @@ const groups: Record<string, group> = {
     },
     runs: [
       {
-        name: "Beer Run",
+        name: "Austin Beer Runners 5k",
         description: "About 5k",
         location: "Hold Out Brewing",
         time: {
@@ -368,7 +418,7 @@ const groups: Record<string, group> = {
         },
       },
       {
-        name: "Raw Running CAF",
+        name: "Fleet Feet CAF",
         description: "Chill run, 3-7 miles.",
         location: "Fleet Feet Austin",
         time: {
@@ -409,9 +459,9 @@ const groups: Record<string, group> = {
     },
     runs: [
       {
-        name: "November Project Stairs",
-        description: "Running stairs.",
-        location: "LBJ Presidential Library",
+        name: "November Project",
+        description: "Varies",
+        location: "Waterloo Park",
         time: {
           hour: 6,
           minute: 0,
@@ -421,7 +471,7 @@ const groups: Record<string, group> = {
       {
         name: "November Project",
         description: "Varies",
-        location: "Location varies, check social.",
+        location: "Butler District Park",
         time: {
           hour: 6,
           minute: 0,
