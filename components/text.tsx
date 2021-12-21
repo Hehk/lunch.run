@@ -1,12 +1,11 @@
 import React from "react";
-import cls from "../util/cls";
 
 type props = {
   children: React.ReactNode;
   className?: string;
 };
 
-export default function Text({ children, className }: props) {
+export default function Text({ children }: props) {
   return (
     <span>
       {children}
