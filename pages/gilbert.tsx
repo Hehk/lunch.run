@@ -50,7 +50,7 @@ export default function Gilbert() {
       setLink(link)
     } catch (e) {
       console.error(e)
-      setError(e.message)
+      if (e instanceof Error) setError(e.message)
     } finally {
       setLoading("none")
       clearTimeout(timeout)
