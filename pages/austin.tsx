@@ -1,10 +1,6 @@
 import Head from "next/head";
+import Link from "next/link";
 import React from "react";
-import Container from "../components/container";
-import H1 from "../components/h1";
-import H2 from "../components/h2";
-import H3 from "../components/h3";
-import Text from "../components/text";
 
 type event = {
   name: string;
@@ -598,15 +594,27 @@ function AMorPM(hour: number) {
 function Event({ event }: { event: event }) {
   return (
     <li>
-      <div className="pb-4 text-base leading-4">
-        <Text className="w-20 inline-block">
-          {formatHour(event.time.hour)}:{padZero(event.time.minute)}
+      <div>
+        <span className="time">
+          <span>{formatHour(event.time.hour)}:{padZero(event.time.minute)}</span>
           {AMorPM(event.time.hour)}
-        </Text>
-        <Text className="font-bold inline-block">{event.name}</Text>
+        </span>
+        &nbsp;
+        {event.name}
       </div>
-      <Text className="pl-20 pb-4">{event.description}</Text>
-      <Text className="pl-20 pb-4">@ {event.location}</Text>
+      <span className="description">{event.description}</span>
+      <span className="location">@ {event.location}</span>
+
+      <style jsx>{`
+        .time {
+          font-weight: bold;
+        }
+        
+        .description, .location {
+          padding-left: 1rem;
+          display: block;
+        }
+      `}</style>
     </li>
   );
 }
@@ -614,9 +622,18 @@ function Event({ event }: { event: event }) {
 function Social({ link, name }: { link?: string; name: string }) {
   if (!link) return null;
   return (
-    <a className="pr-4" href={link}>
-      <Text className="inline-block underline">{name}</Text>
-    </a>
+    <>
+      <Link href={link}>
+        <a>
+          {name}
+        </a>
+      </Link>
+      <style jsx>{`
+        a {
+          padding-right: 1rem;
+        }
+      `}</style>
+    </>
   );
 }
 
@@ -627,43 +644,62 @@ export default function Austin() {
         <title>Austin Running</title>
         <meta name="description" content="Austin Run Groups" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/running.ico" />
       </Head>
 
       <main>
-        <Container>
-          <H1>Austin Running</H1>
-          <H2>Weekly Runs -------------</H2>
-          {Object.entries(events).map(([day, events]) => {
-            return (
-              <React.Fragment key={day}>
-                <H3>{day}</H3>
-                <ol>
-                  {events.map((event) => (
-                    <Event event={event} key={event.name} />
-                  ))}
-                </ol>
-              </React.Fragment>
-            );
-          })}
+        <h1>Austin Running</h1>
+        {Object.entries(events).map(([day, events]) => {
+          return (
+            <React.Fragment key={day}>
+              <h2>{day}</h2>
+              <ol>
+                {events.map((event) => (
+                  <Event event={event} key={event.name} />
+                ))}
+              </ol>
+            </React.Fragment>
+          );
+        })}
 
-          <H2>Groups ------------------</H2>
-          {Object.entries(groups).map(([id, group]) => {
-            return (
-              <React.Fragment key={id}>
-                <H3>{group.name}</H3>
-                <div className="text-main pb-4 leading-4">
-                  <Social name="Insta" link={group.social.instagram} />
-                  <Social name="Website" link={group.social.website} />
-                  <Social name="Strava" link={group.social.strava} />
-                  <Social name="Twitter" link={group.social.twitter} />
-                  <Social name="Facebook" link={group.social.facebook} />
-                </div>
-              </React.Fragment>
-            );
-          })}
-        </Container>
+        <h2>Groups</h2>
+        {Object.entries(groups).map(([id, group]) => {
+          return (
+            <div key={id}>
+              <h3 className="group">{group.name}</h3>
+              <div className="group-social">
+                <Social name="Insta" link={group.social.instagram} />
+                <Social name="Website" link={group.social.website} />
+                <Social name="Strava" link={group.social.strava} />
+                <Social name="Twitter" link={group.social.twitter} />
+                <Social name="Facebook" link={group.social.facebook} />
+              </div>
+            </div>
+          );
+        })}
       </main>
+
+      <style jsx>{`
+        main {
+          padding: 1rem;
+          font-family: sans-serif;
+          font-size: 16px;
+        }
+        
+        ol {
+          list-style: none;
+          padding-left: 1rem;
+        }
+        
+        .group {
+          margin-bottom: 0;
+          padding: 0 1rem;
+        }
+        
+        .group-social {
+          padding-left: 1rem;
+        }
+      `}</style>
     </div>
   );
 }
