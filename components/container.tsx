@@ -1,13 +1,9 @@
-import React from "react";
+import React from "react"
 
 type props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export default function Container({ children }: props) {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>
 }

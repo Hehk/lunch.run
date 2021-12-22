@@ -1,31 +1,31 @@
-import Head from "next/head";
-import me from "../public/me_and_reg.jpg";
-import { useState } from "react";
+import Head from "next/head"
+import me from "../public/me_and_reg.jpg"
+import { useState } from "react"
 
-type Loading =
-  | 'start'
-  | 'long-load'
-  | 'none'
+type Loading = "start" | "long-load" | "none"
 
 const loadingText = (loading: Loading) => {
   switch (loading) {
-    case 'start': return 'Loading...'
-    case 'long-load': return 'Creating a new map, this can take a ~30s'
-    case 'none': return 'Get GPX!'
+    case "start":
+      return "Loading..."
+    case "long-load":
+      return "Creating a new map, this can take a ~30s"
+    case "none":
+      return "Get GPX!"
   }
 }
 
 export default function Gilbert() {
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState<Loading>('none');
-  const [link, setLink] = useState("");
-  const [error, setError] = useState("");
+  const [input, setInput] = useState("")
+  const [loading, setLoading] = useState<Loading>("none")
+  const [link, setLink] = useState("")
+  const [error, setError] = useState("")
 
   const fetchGPX = async () => {
-    setLoading('start');
+    setLoading("start")
     // TODO timeout mostly works but this could be more detailed
     const timeout = setTimeout(() => {
-      setLoading('long-load')
+      setLoading("long-load")
     }, 1500)
 
     try {
@@ -41,30 +41,29 @@ export default function Gilbert() {
             map: input,
           }),
         }
-      );
+      )
       if (response.status !== 200) {
-        throw new Error(await response.text());
+        throw new Error(await response.text())
       }
 
-      const link = await response.text();
-      setLink(link);
+      const link = await response.text()
+      setLink(link)
     } catch (e) {
-      console.error(e);
-      setError(e.message);
+      console.error(e)
+      setError(e.message)
     } finally {
-      setLoading('none');
+      setLoading("none")
       clearTimeout(timeout)
     }
-  };
+  }
 
-  const submit = (e : React.SyntheticEvent) => {
+  const submit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     e.stopPropagation()
 
-    if (loading !== 'none') return;
-    fetchGPX();
-  };
-
+    if (loading !== "none") return
+    fetchGPX()
+  }
 
   return (
     <div>
@@ -108,14 +107,20 @@ export default function Gilbert() {
             </a>
           ) : null}
 
-
-          {error ? <div className="bg-red-500 rounded-lg px-8 py-3.5 text-white">
-            <p>Error: {error}</p>
-            <br />
-            <p>If this persists, please bug me! I am the <a href={me.src} className="underline">young guy with long hair.</a></p>
-            </div> : null}
+          {error ? (
+            <div className="bg-red-500 rounded-lg px-8 py-3.5 text-white">
+              <p>Error: {error}</p>
+              <br />
+              <p>
+                If this persists, please bug me! I am the{" "}
+                <a href={me.src} className="underline">
+                  young guy with long hair.
+                </a>
+              </p>
+            </div>
+          ) : null}
         </form>
       </main>
     </div>
-  );
+  )
 }

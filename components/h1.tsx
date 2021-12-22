@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
 type props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
 
 export default function H1({ children }: props) {
-  return <h1>{children}</h1>;
+  return <h1>{children}</h1>
 }

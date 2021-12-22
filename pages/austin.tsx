@@ -1,81 +1,86 @@
-import Head from "next/head";
-import Link from "next/link";
-import React from "react";
+import Head from "next/head"
+import Link from "next/link"
+import React from "react"
 
 type event = {
-  name: string;
-  description: string;
-  location: string;
+  name: string
+  description: string
+  location: string
   time: {
-    day: number;
-    hour: number;
-    minute: number;
-  };
-};
+    day: number
+    hour: number
+    minute: number
+  }
+}
 
 type group = {
-  name: string;
-  description?: string;
+  name: string
+  description?: string
   social: {
-    instagram?: string;
-    facebook?: string;
-    website?: string;
-    strava?: string;
-    twitter?: string;
-  };
-  runs: event[];
-};
+    instagram?: string
+    facebook?: string
+    website?: string
+    strava?: string
+    twitter?: string
+  }
+  runs: event[]
+}
 
 const groups: Record<string, group> = {
   SPEEDSHOP_MAFIA: {
     name: "SpeedShop Mafia",
     social: {
-      facebook: "https://www.facebook.com/groups/173579006902668/"
+      facebook: "https://www.facebook.com/groups/173579006902668/",
     },
     runs: [
       {
         name: "SpeedShop Workout",
-        description: "Workout rotates, check out their facebook for which one it will be",
+        description:
+          "Workout rotates, check out their facebook for which one it will be",
         location: "Yellowjacket Stadium",
         time: {
           hour: 18,
           minute: 0,
-          day: 2
-        }
-      }
-    ]
+          day: 2,
+        },
+      },
+    ],
   },
   SUNRISE_TRACK_CLUB: {
     name: "Sunrise Track Club",
     social: {
-      instagram: "https://www.instagram.com/sunrise_track_club/"
+      instagram: "https://www.instagram.com/sunrise_track_club/",
     },
-    runs: [{
-      name: "Sunrise Track Club Track Workout",
-      description: "Workout varies",
-      location: "Austin High School",
-      time: {
-        hour: 6,
-        minute: 0,
-        day: 4
-      }
-    }]
+    runs: [
+      {
+        name: "Sunrise Track Club Track Workout",
+        description: "Workout varies",
+        location: "Austin High School",
+        time: {
+          hour: 6,
+          minute: 0,
+          day: 4,
+        },
+      },
+    ],
   },
   NORTH_AUSTIN_RUN_CLUB: {
     name: "North Austin Run Club",
     social: {
-      facebook: "https://www.facebook.com/NorthAustinRunClub/"
+      facebook: "https://www.facebook.com/NorthAustinRunClub/",
     },
-    runs: [{
-      name: "North Austin Run Club Evening Social Run",
-      description: "Evening Run",
-      location: "Little Woodrow's Burnet",
-      time: {
-        hour: 19,
-        minute: 0,
-        day: 1
-      }
-    }]
+    runs: [
+      {
+        name: "North Austin Run Club Evening Social Run",
+        description: "Evening Run",
+        location: "Little Woodrow's Burnet",
+        time: {
+          hour: 19,
+          minute: 0,
+          day: 1,
+        },
+      },
+    ],
   },
   AUSTIN_BEER_RUNNERS: {
     name: "Austin Beer Runners",
@@ -529,26 +534,26 @@ const groups: Record<string, group> = {
       },
     ],
   },
-};
+}
 
 function getDay(num: number) {
   switch (num) {
     case 1:
-      return "monday";
+      return "monday"
     case 2:
-      return "tuesday";
+      return "tuesday"
     case 3:
-      return "wednesday";
+      return "wednesday"
     case 4:
-      return "thursday";
+      return "thursday"
     case 5:
-      return "friday";
+      return "friday"
     case 6:
-      return "saturday";
+      return "saturday"
     case 7:
-      return "sunday";
+      return "sunday"
     default:
-      return "sunday";
+      return "sunday"
   }
 }
 let events: Record<string, event[]> = {
@@ -559,36 +564,36 @@ let events: Record<string, event[]> = {
   friday: [],
   saturday: [],
   sunday: [],
-};
+}
 events = Object.values(groups).reduce((events, group) => {
   group.runs.forEach((event) => {
-    events[getDay(event.time.day)].push(event);
+    events[getDay(event.time.day)].push(event)
     events[getDay(event.time.day)].sort((a, b) => {
-      let diff = a.time.hour - b.time.hour;
-      if (diff === 0) return a.time.minute - b.time.minute;
-      return diff;
-    });
-  });
-  return events;
-}, events);
+      let diff = a.time.hour - b.time.hour
+      if (diff === 0) return a.time.minute - b.time.minute
+      return diff
+    })
+  })
+  return events
+}, events)
 
 function padZero(time: number) {
-  let output = time.toString();
+  let output = time.toString()
   if (output.length === 1) {
-    return "0" + output;
+    return "0" + output
   } else {
-    return output;
+    return output
   }
 }
 
 function formatHour(hour: number) {
-  if (hour >= 13) hour -= 12;
-  return padZero(hour);
+  if (hour >= 13) hour -= 12
+  return padZero(hour)
 }
 
 function AMorPM(hour: number) {
-  if (hour >= 12) return "PM";
-  return "AM";
+  if (hour >= 12) return "PM"
+  return "AM"
 }
 
 function Event({ event }: { event: event }) {
@@ -596,7 +601,9 @@ function Event({ event }: { event: event }) {
     <li>
       <div>
         <span className="time">
-          <span>{formatHour(event.time.hour)}:{padZero(event.time.minute)}</span>
+          <span>
+            {formatHour(event.time.hour)}:{padZero(event.time.minute)}
+          </span>
           {AMorPM(event.time.hour)}
         </span>
         &nbsp;
@@ -609,24 +616,23 @@ function Event({ event }: { event: event }) {
         .time {
           font-weight: bold;
         }
-        
-        .description, .location {
+
+        .description,
+        .location {
           padding-left: 1rem;
           display: block;
         }
       `}</style>
     </li>
-  );
+  )
 }
 
 function Social({ link, name }: { link?: string; name: string }) {
-  if (!link) return null;
+  if (!link) return null
   return (
     <>
       <Link href={link}>
-        <a>
-          {name}
-        </a>
+        <a>{name}</a>
       </Link>
       <style jsx>{`
         a {
@@ -634,7 +640,7 @@ function Social({ link, name }: { link?: string; name: string }) {
         }
       `}</style>
     </>
-  );
+  )
 }
 
 export default function Austin() {
@@ -659,7 +665,7 @@ export default function Austin() {
                 ))}
               </ol>
             </React.Fragment>
-          );
+          )
         })}
 
         <h2>Groups</h2>
@@ -675,7 +681,7 @@ export default function Austin() {
                 <Social name="Facebook" link={group.social.facebook} />
               </div>
             </div>
-          );
+          )
         })}
       </main>
 
@@ -685,21 +691,21 @@ export default function Austin() {
           font-family: sans-serif;
           font-size: 16px;
         }
-        
+
         ol {
           list-style: none;
           padding-left: 1rem;
         }
-        
+
         .group {
           margin-bottom: 0;
           padding: 0 1rem;
         }
-        
+
         .group-social {
           padding-left: 1rem;
         }
       `}</style>
     </div>
-  );
+  )
 }

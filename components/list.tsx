@@ -1,10 +1,6 @@
 import React from "react"
 
-export default function List({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function List({ children }: { children: React.ReactNode }) {
   return (
     <ul>
       {children}

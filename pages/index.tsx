@@ -13,30 +13,23 @@ export default function Home() {
         Superhuman that is obsessed with checklists and serif fonts.
       </P>
       <P>
-        I spend most of my free time running and learning. Below are the
-        things I am currently working on.
+        I spend most of my free time running and learning. Below are the things
+        I am currently working on.
       </P>
       <H3>Current Projects</H3>
       <List>
         <li>
-          <Link href="https://github.com/Hehk/roam-css">
-            Roam Theme
-          </Link>
-          , I am actively iterating on my own roam theme after a couple years of
-          using a bunch.
+          <Link href="https://github.com/Hehk/roam-css">Roam Theme</Link>, I am
+          actively iterating on my own roam theme after a couple years of using
+          a bunch.
         </li>
         <li>
-          <Link href="/austin">
-            /austin
-          </Link>
-          , a collected list of all the running groups I have found in Austin,
-          TX.
+          <Link href="/austin">/austin</Link>, a collected list of all the
+          running groups I have found in Austin, TX.
         </li>
         <li>
-          <Link href="https://github.com/Hehk/Scripts">
-            Personal Script
-          </Link>
-          , I am on a personal crusade over the next couple months to automate a
+          <Link href="https://github.com/Hehk/Scripts">Personal Script</Link>, I
+          am on a personal crusade over the next couple months to automate a
           bunch of the things I do regularly.
         </li>
       </List>
