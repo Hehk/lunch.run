@@ -1,5 +1,6 @@
 import Head from "next/head"
 import Link from "next/link"
+import MinimalLayout from "../components/minimal_layout"
 import React from "react"
 
 type event = {
@@ -645,7 +646,7 @@ function Social({ link, name }: { link?: string; name: string }) {
 
 export default function Austin() {
   return (
-    <div>
+    <MinimalLayout>
       <Head>
         <title>Austin Running</title>
         <meta name="description" content="Austin Run Groups" />
@@ -706,6 +707,6 @@ export default function Austin() {
           padding-left: 1rem;
         }
       `}</style>
-    </div>
+    </MinimalLayout>
   )
 }
