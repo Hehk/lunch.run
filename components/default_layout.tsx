@@ -15,13 +15,13 @@ function Page({ children }: childProps) {
           grid-column-gap: 1rem;
           padding: 5rem 2rem;
         }
-        
+
         @media (max-width: 800px) {
           main {
             display: block;
             padding: 2rem;
           }
-        }  
+        }
       `}</style>
     </main>
   )
