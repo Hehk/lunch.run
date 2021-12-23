@@ -9,11 +9,19 @@ function Page({ children }: childProps) {
       {children}
       <style jsx>{`
         main {
+          margin: 0 auto;
           display: grid;
-          grid-template-columns: 1fr repeat(2, 500px) 1fr;
+          grid-template-columns: 1fr minmax(100px, 500px) minmax(100px, 500px) 1fr;
           grid-column-gap: 1rem;
-          padding: 5rem 5rem;
+          padding: 5rem 2rem;
         }
+        
+        @media (max-width: 800px) {
+          main {
+            display: block;
+            padding: 2rem;
+          }
+        }  
       `}</style>
     </main>
   )
@@ -77,7 +85,6 @@ export default function DefaultLayout({
       </Head>
 
       <Page>
-        <Content>{children}</Content>
         <Nav>
           <Title>{title ? title : "Kyle Henderson"}</Title>
           <div className="links">
@@ -96,11 +103,13 @@ export default function DefaultLayout({
             <Link href="/reg">Reg</Link>
           </div>
         </Nav>
+        <Content>{children}</Content>
       </Page>
 
       <style jsx>{`
         .links {
           margin-top: 2rem;
+          margin-bottom: 2rem;
         }
       `}</style>
     </>
