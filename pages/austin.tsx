@@ -383,7 +383,7 @@ const groups: Record<string, group> = {
         location: "The Loop Running Store",
         time: {
           hour: 18,
-          minute: 30,
+          minute: 0,
           day: 2,
         },
       },
@@ -393,7 +393,7 @@ const groups: Record<string, group> = {
         location: "The Loop Running Store",
         time: {
           hour: 18,
-          minute: 30,
+          minute: 0,
           day: 4,
         },
       },
