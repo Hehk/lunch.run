@@ -158,7 +158,7 @@ const groups: Record<string, group> = {
         location: "Jo's Coffee at 1300 S Congress Ave, Austin, TX 78704",
         time: {
           hour: 6,
-          minute: 30,
+          minute: 0,
           day: 2,
         },
       },
